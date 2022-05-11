@@ -16,7 +16,7 @@ our @EXPORT = qw(placeholder);
 
 my $cgi = CGI->new;
 
-sub placeholder {
+sub apply {
 
   die "FATAL: '_common' cannot be used as the page name" if $_[0] eq "_common";
 

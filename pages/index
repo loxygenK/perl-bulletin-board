@@ -7,12 +7,12 @@ use warnings;
 
 use CGI;
 
-use placeholder;
 use adapter::IO;
+use view::placeholder;
 
 ###########################################################3
 
-placeholder("index", sub {
+&placeholder::apply("index", sub {
   return <<EOF
 <!-- -->
 

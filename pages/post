@@ -7,15 +7,15 @@ use warnings;
 
 use CGI;
 
-use placeholder;
-
 use domain::Post;
 use types::Result;
 use repository::PostRepository;
 
+use view::placeholder;
+
 ###########################################################3
 
-placeholder("index", sub {
+&placeholder::apply("post", sub {
   my $id = "6";#$_[0]->param("id");
   my %post = &PostRepository::post_load($id);
 

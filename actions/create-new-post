@@ -3,14 +3,13 @@
 use strict;
 use warnings;
 
-use placeholder;
-
 use domain::Post;
 use repository::PostRepository;
+use view::placeholder;
 
 use CGI;
 
-placeholder("create-new-post", sub {
+&placeholder::apply("create-new-post", sub {
   my $cgi = $_[0];
 
   my $author = $cgi->param("author");
