@@ -7,18 +7,19 @@ use CGI;
 
 use adapter::IO;
 use view::placeholder;
-
 use repository::PostRepository;
+use types::WithID;
 
 use Data::Dumper;
 
 ###########################################################3
 
 sub post_list_element {
-  my %post = %{$_};
+  my $id = WithID::get_id($_);
+  my %post = WithID::unwrap($_);
 
   return <<EOF
-  <a href="#">
+  <a href="/cgi-bin/assignment10/pages/post?id=$id">
     <li class="post_list_element">
       <h3 class="post_list_element__title">${\( Post::title(\%post) )}</h3>
       <span class="post_list_element__author">
@@ -31,13 +32,13 @@ EOF
 
 &placeholder::apply("index", sub {
 
-  my @list = PostRepository::list();
+  my @list = reverse(PostRepository::latest(5));
 
   return <<EOF
 <!-- -->
   <div class="page_content">
     <section class="new_post_section">
-      <h2 class="new_post_section__title">New post</h2>
+      <h2 class="new_post_section__title">🙌 New post</h2>
       <form action="/cgi-bin/assignment10/actions/create-new-post">
         <ul class="new_post_section__form">
           <li class="new_post_section__form__input">

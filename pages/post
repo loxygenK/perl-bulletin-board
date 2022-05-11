@@ -10,8 +10,9 @@ use CGI;
 use Data::Dumper;
 
 use domain::Post;
-use types::Result;
 use repository::PostRepository;
+use types::Result;
+use types::WithID;
 
 use view::placeholder;
 
@@ -26,7 +27,10 @@ local $Data::Dumper::Terse = 1;
   if(!Result::is_ok(\%maybe_post)) {
     return "Could not find the post";
   }
-  my %post = Result::unwrap(\%maybe_post);
+  my %post_with_id = Result::unwrap(\%maybe_post);
+
+  my $id = WithID::get_id(\%post_with_id);
+  my %post = WithID::unwrap(\%post_with_id);
 
   return <<EOF
 <!-- -->
@@ -36,7 +40,8 @@ local $Data::Dumper::Terse = 1;
         ${\(Post::title(\%post))}
       </h2>
       <span class="article__author">
-        Posted by ${\(Post::author(\%post))}
+        Posted by ${\(Post::author(\%post))}・
+        Post number #$id
       </span>
     </section>
     <section>
