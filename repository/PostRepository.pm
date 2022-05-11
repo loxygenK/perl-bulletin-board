@@ -5,8 +5,9 @@ use warnings;
 
 use adapter::IO;
 use domain::Post;
-use types::Result;
 use repository::ID;
+use types::Result;
+use types::WithID;
 
 use Exporter;
 our @ISA = qw(Exporter);
@@ -36,14 +37,19 @@ sub get_by_id {
   }
 
   my %post = &Post::new($author, $title, $content);
-  return &Result::ok(\%post);
+  my %post_with_id = WithID::new($id, \%post);
+  return &Result::ok(\%post_with_id);
 }
 
-sub list {
+sub latest {
+  my $count = $_[0];
   my $max_id = ID::get("post");
 
+  my $start = $max_id < $count ? 1 : ($max_id - $count + 1);
+  my $end   = $max_id < $count ? $count : $max_id;
+
   my @posts = ();
-  foreach my $id (1..$max_id) {
+  foreach my $id ($start..$end) {
     my %maybe_post = &get_by_id($id);
     my %post = Result::unwrap(\%maybe_post);
 
