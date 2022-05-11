@@ -21,13 +21,17 @@ sub bad {
 }
 
 sub is_ok {
-  return $_[0]{"status"} eq "OK"
+  my %self = %{$_[0]};
+
+  return $self{"status"} eq "OK"
 }
 
 sub unwrap {
-  if(!result_is_ok($_[0])) {
-    die "FATAL: Invalid unwrap occured. Error was: " . $_[0]{"error"};
+  my %self = %{$_[0]};
+
+  if(!is_ok(\%self)) {
+    die "FATAL: Invalid unwrap occured. Error was: " . $self{"error"};
   }
 
-  return $_[0]{"payload"};
+  return $self{"payload"};
 }

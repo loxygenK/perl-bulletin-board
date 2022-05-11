@@ -12,13 +12,13 @@ sub new {
   return (
     author => $_[0],
     content => $_[1]
-  )
+  );
 }
 
 sub author {
-  return %_{"author"};
+  return %{$_[0]}{"author"};
 }
 
 sub content {
-  return %_{"content"};
+  return %{$_[0]}{"content"};
 }

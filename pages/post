@@ -16,21 +16,23 @@ use view::placeholder;
 ###########################################################3
 
 &placeholder::apply("post", sub {
-  my $id = "6";#$_[0]->param("id");
+  my $id = $_[0]->param("id");
   my %post = &PostRepository::get_by_id($id);
 
-  if(!Result::result_is_ok(%post)) {
+  if(!Result::is_ok(\%post)) {
     return "Could not find the post";
   }
 
-  my %raw_post = Result::unwrap(%post);
+  my %raw_post = Result::unwrap(\%post);
 
-  my $author = Post::author(%post);
-  my $content = Post::content(%post);
+  my %self_unwrap = %post{"payload"};
+  my $aut = $self_unwrap{"author"};
+  my $author = Post::author(\%raw_post);
+  my $content = Post::content(\%raw_post);
 
   return <<EOF
 <!-- -->
-  $author<br>$content
+  $aut
 <!--
 EOF
 ;})

@@ -16,6 +16,16 @@ our @EXPORT = qw(placeholder);
 
 my $cgi = CGI->new;
 
+sub render {
+  die "FATAL: '_common' cannot be used as the page name" if $_[0] eq "_common";
+
+  my $common_style = &IO::read_all("../styles/_common.css");
+  my $style = &IO::read_all("../styles/$_[0].css");
+  my $content = $_[1]->($cgi);
+
+  print $content;
+}
+
 sub apply {
 
   die "FATAL: '_common' cannot be used as the page name" if $_[0] eq "_common";

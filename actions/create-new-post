@@ -9,17 +9,21 @@ use view::placeholder;
 
 use CGI;
 
-&placeholder::apply("create-new-post", sub {
+&placeholder::render("create-new-post", sub {
   my $cgi = $_[0];
 
   my $author = $cgi->param("author");
   my $content = $cgi->param("content");
 
-  my $id = &PostRepository::add(&Post::new($author, $content));
+  my %post = &Post::new($author, $content);
+
+  my $created_author = $post{"author"};
+
+  my $id = &PostRepository::add(\%post);
 
   return <<EOF
-Content-Type: text/html
+Status: 302 Found
+Location: /cgi-bin/assignment10/pages/post?id=$id
 
-$id
 EOF
 });

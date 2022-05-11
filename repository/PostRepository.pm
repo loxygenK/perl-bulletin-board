@@ -27,8 +27,8 @@ sub add {
   my $id = &generate_ID();
   my $path = &IO::store("post/$id");
 
-  my $author = &Post::author(%_[0]);
-  my $content = &Post::content(%_[0]);
+  my $author = &Post::author($_[0]);
+  my $content = &Post::content($_[0]);
 
   &IO::write_file($path, "$author\n$content");
 
