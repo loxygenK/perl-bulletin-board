@@ -5,14 +5,10 @@
 use strict;
 use warnings;
 
-use lib "../";
-use placeholder;
-
-use lib "../lib";
-use IO;
-
-use lib "/usr/share/perl5";
 use CGI;
+
+use placeholder;
+use lib::IO;
 
 ###########################################################3
 

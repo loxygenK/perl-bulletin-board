@@ -5,11 +5,9 @@ package placeholder;
 use strict;
 use warnings;
 
-use lib "../lib";
-use lib "/usr/share/perl5";
-
-use IO;
 use CGI;
+
+use lib::IO;
 
 use Exporter;
 our @ISA = qw(Exporter);
@@ -22,8 +20,8 @@ sub placeholder {
 
   die "FATAL: '_common' cannot be used as the page name" if $_[0] eq "_common";
 
-  my $common_style = &read_all("../styles/_common.css");
-  my $style = &read_all("../styles/$_[0].css");
+  my $common_style = &IO::read_all("../styles/_common.css");
+  my $style = &IO::read_all("../styles/$_[0].css");
   my $content = $_[1]->($cgi);
 
   print <<EOT

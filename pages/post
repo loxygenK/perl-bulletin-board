@@ -5,18 +5,14 @@
 use strict;
 use warnings;
 
-use lib "../";
+use CGI;
+
 use placeholder;
 
-use lib "../lib";
-use Result;
+use lib::Result;
 
-use lib "../src";
-use Post;
-use PostRepository;
-
-use lib "/usr/share/perl5";
-use CGI;
+use src::Post;
+use src::PostRepository;
 
 ###########################################################3
 
