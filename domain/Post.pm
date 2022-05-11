@@ -8,17 +8,17 @@ our @ISA = qw(Exporter);
 our @EXPORT_OK = qw(post_def post_author post_content);
 our @EXPORT = qw(post_def post_author post_content);
 
-sub post_def {
+sub new {
   return (
     author => $_[0],
     content => $_[1]
   )
 }
 
-sub post_author {
+sub author {
   return %_{"author"};
 }
 
-sub post_content {
+sub content {
   return %_{"content"};
 }

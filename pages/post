@@ -17,7 +17,7 @@ use view::placeholder;
 
 &placeholder::apply("post", sub {
   my $id = "6";#$_[0]->param("id");
-  my %post = &PostRepository::post_load($id);
+  my %post = &PostRepository::get_by_id($id);
 
   if(!Result::result_is_ok(%post)) {
     return "Could not find the post";
@@ -25,8 +25,8 @@ use view::placeholder;
 
   my %raw_post = Result::unwrap(%post);
 
-  my $author = Post::post_author(%post);
-  my $content = Post::post_content(%post);
+  my $author = Post::author(%post);
+  my $content = Post::content(%post);
 
   return <<EOF
 <!-- -->

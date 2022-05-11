@@ -23,21 +23,21 @@ sub generate_ID {
   return $new_id;
 }
 
-sub post_new {
+sub add {
   my $id = &generate_ID();
   my $path = &IO::store("post/$id");
 
-  my $author = &Post::post_author(%_[0]);
-  my $content = &Post::post_content(%_[0]);
+  my $author = &Post::author(%_[0]);
+  my $content = &Post::content(%_[0]);
 
   &IO::write_file($path, "$author\n$content");
 
   return $id;
 }
 
-sub post_load {
+sub get_by_id {
   my $id = $_[0];
-  open POST, &IO::store("post/$id") or return &Result::result_bad("Post not found");
+  open POST, &IO::store("post/$id") or return &Result::bad("Post not found");
 
   my $author = <POST>;
   my $content = "";
@@ -45,5 +45,5 @@ sub post_load {
     $content = $content . $_;
   }
 
-  return &Result::result_ok(&Post::post_def($author, $content));
+  return &Result::ok(&Post::new($author, $content));
 }

@@ -6,21 +6,21 @@ use warnings;
 use Exporter;
 our @ISA = qw(Exporter);
 
-sub result_ok {
+sub ok {
   return (
     status => "OK",
     payload => $_[0]
   );
 }
 
-sub result_bad {
+sub bad {
   return (
     status => "BAD",
     error => $_[0]
   );
 }
 
-sub result_is_ok {
+sub is_ok {
   return $_[0]{"status"} eq "OK"
 }
 

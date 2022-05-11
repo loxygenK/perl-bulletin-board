@@ -15,7 +15,7 @@ use CGI;
   my $author = $cgi->param("author");
   my $content = $cgi->param("content");
 
-  my $id = &PostRepository::post_new(&Post::post_def($author, $content));
+  my $id = &PostRepository::add(&Post::new($author, $content));
 
   return <<EOF
 Content-Type: text/html
