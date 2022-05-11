@@ -1,55 +1,22 @@
 #!/usr/bin/perl
 
-# <!--
-
 use strict;
 use warnings;
 
-use lib "./lib";
-use lib "/usr/share/perl5";
+use lib "./";
+use placeholder;
 
+use lib "./lib";
 use IO;
+
+use lib "/usr/share/perl5";
 use CGI;
 
-my $style = &read_all("./style.css");
+###########################################################3
 
-print <<EOT
-Content-Type: text/html
+print <<EOF
+Status: 302 Found
+Location: /cgi-bin/assignment10/pages/index
 
-<!-- -->
-
-<!DOCTYPE HTML>
-<html>
-  <head>
-    <style>
-      $style
-    </style>
-  </head>
-
-  <body>
-    <header class="header">
-      <h1 class="header__logo">
-        <span class="header__logo__brand_name">
-          RaB2WoPerOX
-        </span>
-        <span class="header__logo__brand_catchcopy">
-          <span>
-            Random bulletin board
-          </span>
-          <span>
-            working on Perl on XAMPP
-          </span>
-        </span>
-      </h1>
-      <button class="header__new_post">
-        New post?
-      </button
-    </header>
-  </body>
-</html>
-
-<!--
-EOT
+EOF
 ;
-
-# vim: set ft=html: -->

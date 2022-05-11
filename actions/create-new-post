@@ -1,0 +1,28 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+
+use lib "../";
+use placeholder;
+
+use lib "../src";
+use PostRepository;
+
+use lib "/usr/share/perl5";
+use CGI;
+
+placeholder("create-new-post", sub {
+  my $cgi = $_[0];
+
+  my $author = $cgi->param("author");
+  my $content = $cgi->param("content");
+
+  my $id = &post_new(&post_def($author, $content));
+
+  return <<EOF
+Content-Type: text/html
+
+$id
+EOF
+});

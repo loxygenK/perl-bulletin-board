@@ -1,0 +1,13 @@
+#!/usr/bin/perl
+
+use Cwd;
+
+my $cwd = getcwd;
+
+print <<EOF
+Content-Type: text/html
+
+hoge
+$cwd
+EOF
+;

@@ -1,0 +1,49 @@
+#!/usr/bin/perl
+
+# <!--
+
+use strict;
+use warnings;
+
+use lib "../";
+use placeholder;
+
+use lib "../lib";
+use IO;
+
+use lib "/usr/share/perl5";
+use CGI;
+
+###########################################################3
+
+placeholder("index", sub {
+  return <<EOF
+<!-- -->
+
+  <section class="new_post_section">
+    <h2 class="new_post_section__title">New post</h2>
+    <form action="/cgi-bin/assignment10/actions/create-new-post">
+      <ul class="new_post_section__form">
+        <li class="new_post_section__form__input">
+          <label for="author">Author</label>
+          <input type="text" id="author" name="author">
+        </li>
+        <li class="new_post_section__form__input">
+          <label for="content">Contents</label>
+          <textarea
+            type="text"
+            id="content"
+            name="content"
+            class="new_post_section__form__textarea"
+          ></textarea>
+        </li>
+        <button type="submit">Post!</button>
+      </ul>
+    </form>
+  </section>
+
+<!--
+EOF
+;})
+
+# vim: set ft=html: -->

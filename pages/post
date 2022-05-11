@@ -1,0 +1,42 @@
+#!/usr/bin/perl
+
+# <!--
+
+use strict;
+use warnings;
+
+use lib "../";
+use placeholder;
+
+use lib "../lib";
+use Result;
+
+use lib "../src";
+use Post;
+use PostRepository;
+
+use lib "/usr/share/perl5";
+use CGI;
+
+###########################################################3
+
+placeholder("index", sub {
+  my $id = "6";#$_[0]->param("id");
+  my %post = &PostRepository::post_load($id);
+
+  if(!Result::result_is_ok(%post)) {
+    return "Could not find the post";
+  }
+
+  my %raw_post = Result::unwrap(%post);
+
+  my $author = Post::post_author(%post);
+  my $content = Post::post_content(%post);
+
+  return <<EOF
+<!-- -->
+  $author<br>$content
+<!--
+EOF
+;})
+
