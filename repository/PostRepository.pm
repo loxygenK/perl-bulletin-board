@@ -6,25 +6,15 @@ use warnings;
 use adapter::IO;
 use domain::Post;
 use types::Result;
+use repository::ID;
 
 use Exporter;
 our @ISA = qw(Exporter);
 our @EXPORT_OK = qw(post_new post_load);
 our @EXPORT = qw(post_new post_load);
 
-sub generate_ID {
-  my $id_path = &IO::store("post_id");
-
-  my $id = &IO::read_all($id_path);
-  my $new_id = $id + 1;
-
-  &IO::write_file($id_path, $new_id);
-
-  return $new_id;
-}
-
 sub add {
-  my $id = &generate_ID();
+  my $id = ID::generate("post");
   my $path = &IO::store("post/$id");
 
   my $author = &Post::author($_[0]);
@@ -49,4 +39,8 @@ sub get_by_id {
 
   my %post = &Post::new($author, $title, $content);
   return &Result::ok(\%post);
+}
+
+sub list {
+
 }
