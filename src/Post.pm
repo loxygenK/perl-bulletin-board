@@ -1,4 +1,4 @@
-package Result;
+package Post;
 
 use strict;
 use warnings;
@@ -16,9 +16,9 @@ sub post_def {
 }
 
 sub post_author {
-  return $_[0]{"author"};
+  return %_{"author"};
 }
 
 sub post_content {
-  return $_[0]{"content"};
+  return %_{"content"};
 }
