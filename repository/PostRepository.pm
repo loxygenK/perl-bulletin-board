@@ -3,10 +3,9 @@ package PostRepository;
 use strict;
 use warnings;
 
-use src::Post;
-
-use lib::IO;
-use lib::Result;
+use adapter::IO;
+use domain::Post;
+use types::Result;
 
 use Exporter;
 our @ISA = qw(Exporter);

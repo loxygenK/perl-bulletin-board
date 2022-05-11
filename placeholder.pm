@@ -7,7 +7,7 @@ use warnings;
 
 use CGI;
 
-use lib::IO;
+use adapter::IO;
 
 use Exporter;
 our @ISA = qw(Exporter);

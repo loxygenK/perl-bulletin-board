@@ -5,8 +5,8 @@ use warnings;
 
 use placeholder;
 
-use src::Post;
-use src::PostRepository;
+use domain::Post;
+use repository::PostRepository;
 
 use CGI;
 

@@ -9,10 +9,9 @@ use CGI;
 
 use placeholder;
 
-use lib::Result;
-
-use src::Post;
-use src::PostRepository;
+use domain::Post;
+use types::Result;
+use repository::PostRepository;
 
 ###########################################################3
 
