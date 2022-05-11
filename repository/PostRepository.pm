@@ -45,5 +45,6 @@ sub get_by_id {
     $content = $content . $_;
   }
 
-  return &Result::ok(&Post::new($author, $content));
+  my %post = &Post::new($author, $content);
+  return &Result::ok(\%post);
 }

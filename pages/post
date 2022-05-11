@@ -7,11 +7,15 @@ use warnings;
 
 use CGI;
 
+use Data::Dumper;
+
 use domain::Post;
 use types::Result;
 use repository::PostRepository;
 
 use view::placeholder;
+
+local $Data::Dumper::Terse = 1;
 
 ###########################################################3
 
@@ -22,17 +26,15 @@ use view::placeholder;
   if(!Result::is_ok(\%post)) {
     return "Could not find the post";
   }
-
   my %raw_post = Result::unwrap(\%post);
 
-  my %self_unwrap = %post{"payload"};
-  my $aut = $self_unwrap{"author"};
   my $author = Post::author(\%raw_post);
   my $content = Post::content(\%raw_post);
 
   return <<EOF
 <!-- -->
-  $aut
+  $author
+  $content
 <!--
 EOF
 ;})

@@ -33,5 +33,5 @@ sub unwrap {
     die "FATAL: Invalid unwrap occured. Error was: " . $self{"error"};
   }
 
-  return $self{"payload"};
+  return %{$self{"payload"}};
 }
