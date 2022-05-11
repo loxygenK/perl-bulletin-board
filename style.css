@@ -1,0 +1,58 @@
+* {
+  box-sizing: border-box;
+  font-size: initial;
+  font-weight: initial;
+
+  background: none;
+  border: none;
+
+  appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Noto Sans JP, sans-serif;
+}
+
+button {
+  padding: 0.5em 1.25em;
+  border: 2px solid #000;
+
+  border-radius: 10px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background-color: #57483e;
+  padding: 1rem 2rem;
+
+  color: #ffffff;
+}
+
+.header__logo {
+  display: flex;
+  gap: 1em;
+  align-items: center;
+}
+
+.header__logo__brand_name {
+  font-size: 2.5em;
+  font-weight: 600;
+}
+
+.header__logo__brand_catchcopy {
+  display: flex;
+  flex-direction: column;
+}
+
+.header__new_post {
+  border-color: #ffffff;
+  color: #ffffff;
+}
