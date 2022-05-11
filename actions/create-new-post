@@ -13,11 +13,10 @@ use CGI;
   my $cgi = $_[0];
 
   my $author = $cgi->param("author");
+  my $title = $cgi->param("title");
   my $content = $cgi->param("content");
 
-  my %post = &Post::new($author, $content);
-
-  my $created_author = $post{"author"};
+  my %post = &Post::new($author, $title, $content);
 
   my $id = &PostRepository::add(\%post);
 

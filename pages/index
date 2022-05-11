@@ -25,6 +25,10 @@ use view::placeholder;
           <input type="text" id="author" name="author">
         </li>
         <li class="new_post_section__form__input">
+          <label for="author">Title</label>
+          <input type="text" id="title" name="title">
+        </li>
+        <li class="new_post_section__form__input">
           <label for="content">Contents</label>
           <textarea
             type="text"

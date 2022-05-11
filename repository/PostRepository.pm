@@ -28,9 +28,10 @@ sub add {
   my $path = &IO::store("post/$id");
 
   my $author = &Post::author($_[0]);
+  my $title = &Post::title($_[0]);
   my $content = &Post::content($_[0]);
 
-  &IO::write_file($path, "$author\n$content");
+  &IO::write_file($path, "$author\n$title\n$content");
 
   return $id;
 }
@@ -40,11 +41,12 @@ sub get_by_id {
   open POST, &IO::store("post/$id") or return &Result::bad("Post not found");
 
   my $author = <POST>;
+  my $title = <POST>;
   my $content = "";
   while(<POST>) {
     $content = $content . $_;
   }
 
-  my %post = &Post::new($author, $content);
+  my %post = &Post::new($author, $title, $content);
   return &Result::ok(\%post);
 }

@@ -21,21 +21,30 @@ local $Data::Dumper::Terse = 1;
 
 &placeholder::apply("post", sub {
   my $id = $_[0]->param("id");
-  my %post = &PostRepository::get_by_id($id);
+  my %maybe_post = &PostRepository::get_by_id($id);
 
-  if(!Result::is_ok(\%post)) {
+  if(!Result::is_ok(\%maybe_post)) {
     return "Could not find the post";
   }
-  my %raw_post = Result::unwrap(\%post);
-
-  my $author = Post::author(\%raw_post);
-  my $content = Post::content(\%raw_post);
+  my %post = Result::unwrap(\%maybe_post);
 
   return <<EOF
 <!-- -->
-  $author
-  $content
+  <article class="article">
+    <section>
+      <h2 class="article__title">
+        ${\(Post::title(\%post))}
+      </h2>
+      <span class="article__author">
+        Posted by ${\(Post::author(\%post))}
+      </span>
+    </section>
+    <section>
+      ${\(Post::content(\%post))}
+    </section>
+  </article>
 <!--
 EOF
 ;})
 
+# vim: set ft=html: -->

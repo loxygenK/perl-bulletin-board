@@ -1,0 +1,20 @@
+.article {
+  display: flex;
+  flex-direction: column;
+
+  gap: 1em;
+}
+
+.article__title {
+  font-size: 2em;
+  font-weight: 600;
+
+  line-height: 100%;
+}
+
+.article__author {
+  font-size: 0.9em;
+  color: #333;
+
+  line-height: 100%;
+}
