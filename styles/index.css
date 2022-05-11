@@ -1,3 +1,10 @@
+.page_content {
+  display: flex;
+  flex-direction: column;
+
+  gap: 3em;
+}
+
 .new_post_section {
   display: grid;
   gap: 1em;
@@ -29,4 +36,31 @@
 .new_post_section__form__textarea {
   width: 20em;
   height: 10em;
+}
+
+.recent_post_section__list {
+  display: flex;
+  flex-direction: column;
+
+  gap: 0.2em;
+}
+
+
+
+.post_list_element {
+  display: flex;
+  flex-direction: column;
+
+  background-color: #f0f0f0;
+
+  padding: 0.5em 1em;
+}
+
+.post_list_element__title {
+  font-weight: 600;
+}
+
+.post_list_element__author {
+  font-size: 0.9em;
+  color: #555;
 }

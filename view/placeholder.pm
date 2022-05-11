@@ -35,7 +35,7 @@ sub apply {
   my $content = $_[1]->($cgi);
 
   print <<EOT
-Content-Type: text/html
+Content-Type: text/html; charset=UTF-8
 
 <!-- -->
 
@@ -54,9 +54,11 @@ Content-Type: text/html
   <body>
     <header class="header">
       <h1 class="header__logo">
-        <span class="header__logo__brand_name">
-          RaB2WoPerOX
-        </span>
+        <a href="/cgi-bin/assignment10/index" class="header__logo__brand_link">
+          <span class="header__logo__brand_name">
+            Peranbull
+          </span>
+        </a>
         <span class="header__logo__brand_catchcopy">
           <span>
             Random bulletin board

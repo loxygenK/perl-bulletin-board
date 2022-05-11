@@ -3,17 +3,6 @@
 use strict;
 use warnings;
 
-use lib "./";
-use placeholder;
-
-use lib "./lib";
-use IO;
-
-use lib "/usr/share/perl5";
-use CGI;
-
-###########################################################3
-
 print <<EOF
 Status: 302 Found
 Location: /cgi-bin/assignment10/pages/index

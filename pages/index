@@ -1,7 +1,5 @@
 #!/usr/bin/perl
 
-# <!--
-
 use strict;
 use warnings;
 
@@ -10,38 +8,69 @@ use CGI;
 use adapter::IO;
 use view::placeholder;
 
+use repository::PostRepository;
+
+use Data::Dumper;
+
 ###########################################################3
 
+sub post_list_element {
+  my %post = %{$_};
+
+  return <<EOF
+  <a href="#">
+    <li class="post_list_element">
+      <h3 class="post_list_element__title">${\( Post::title(\%post) )}</h3>
+      <span class="post_list_element__author">
+        Posted by ${\( Post::author(\%post) )}
+      </span>
+    </li>
+  </a>
+EOF
+}
+
 &placeholder::apply("index", sub {
+
+  my @list = PostRepository::list();
+
   return <<EOF
 <!-- -->
+  <div class="page_content">
+    <section class="new_post_section">
+      <h2 class="new_post_section__title">New post</h2>
+      <form action="/cgi-bin/assignment10/actions/create-new-post">
+        <ul class="new_post_section__form">
+          <li class="new_post_section__form__input">
+            <label for="author">Author</label>
+            <input type="text" id="author" name="author">
+          </li>
+          <li class="new_post_section__form__input">
+            <label for="author">Title</label>
+            <input type="text" id="title" name="title">
+          </li>
+          <li class="new_post_section__form__input">
+            <label for="content">Contents</label>
+            <textarea
+              type="text"
+              id="content"
+              name="content"
+              class="new_post_section__form__textarea"
+            ></textarea>
+          </li>
+          <button type="submit">Post!</button>
+        </ul>
+      </form>
+    </section>
 
-  <section class="new_post_section">
-    <h2 class="new_post_section__title">New post</h2>
-    <form action="/cgi-bin/assignment10/actions/create-new-post">
-      <ul class="new_post_section__form">
-        <li class="new_post_section__form__input">
-          <label for="author">Author</label>
-          <input type="text" id="author" name="author">
-        </li>
-        <li class="new_post_section__form__input">
-          <label for="author">Title</label>
-          <input type="text" id="title" name="title">
-        </li>
-        <li class="new_post_section__form__input">
-          <label for="content">Contents</label>
-          <textarea
-            type="text"
-            id="content"
-            name="content"
-            class="new_post_section__form__textarea"
-          ></textarea>
-        </li>
-        <button type="submit">Post!</button>
-      </ul>
-    </form>
-  </section>
-
+    <section class="new_post_section">
+      <h2 class="new_post_section__title">🗳 Recent posts</h2>
+      <ol class="recent_post_section__list">
+        ${\(
+          join("\n", map(post_list_element, @list))
+        )}
+      </ol>
+    </section>
+  </div>
 <!--
 EOF
 ;})

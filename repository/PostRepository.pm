@@ -10,8 +10,6 @@ use repository::ID;
 
 use Exporter;
 our @ISA = qw(Exporter);
-our @EXPORT_OK = qw(post_new post_load);
-our @EXPORT = qw(post_new post_load);
 
 sub add {
   my $id = ID::generate("post");
@@ -42,5 +40,15 @@ sub get_by_id {
 }
 
 sub list {
+  my $max_id = ID::get("post");
 
+  my @posts = ();
+  foreach my $id (1..$max_id) {
+    my %maybe_post = &get_by_id($id);
+    my %post = Result::unwrap(\%maybe_post);
+
+    push(@posts, \%post);
+  }
+
+  return @posts;
 }
