@@ -20,7 +20,9 @@
 
 input, textarea {
   border: 1px solid #ccc;
-  padding: 0.1em 0.3em;;
+  padding: 0.1em 0.3em;
+
+  background-color: #fff;
 }
 
 body {
@@ -39,6 +41,35 @@ button:hover {
   color: initial;
 
   background-color: #eee;
+}
+
+h2 {
+  font-size: 2em;
+  font-weight: 600;
+}
+
+h3 {
+  font-size: 1.25em;
+  font-weight: 600;
+}
+
+h4 {
+  font-size: 1.15em;
+  font-weight: 600;
+}
+
+section {
+  display: grid;
+  gap: 1em;
+
+  padding: 1.5em 1.5em;
+  background-color: #f7f7f7;
+
+  border-radius: 2px;
+}
+
+hr {
+  border-bottom: 3px solid #ddd;
 }
 
 .header {
@@ -80,5 +111,27 @@ button:hover {
 }
 
 .main_content {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
   padding: 4em 4em;
+}
+
+.component__form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  gap: 1em;
+}
+
+.component__form__input {
+  display: grid;
+  grid-gap: 0.2em;
+
+  width: 10em;
+}
+
+.component__form__hidden {
+  display: none;
 }
