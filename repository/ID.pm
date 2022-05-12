@@ -10,6 +10,10 @@ our @ISA = qw(Exporter);
 
 sub get {
   my $id_path = IO::store("id/$_[0]");
+
+  if(! -f $id_path) {
+    IO::write_file($id_path, "0");
+  }
   my $id = IO::read_all($id_path);
 
 	return $id;
