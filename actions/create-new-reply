@@ -1,0 +1,28 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+
+use domain::Reply;
+use repository::ReplyRepository;
+use view::placeholder;
+
+use CGI;
+
+&placeholder::render("create-new-reply", sub {
+  my $cgi = $_[0];
+
+  my $post_id = $cgi->param("post_id");
+  my $author = $cgi->param("author");
+  my $content = $cgi->param("content");
+
+  my %post = Reply::new($post_id, $author, $content);
+
+  ReplyRepository::add(\%post);
+
+  return <<EOF
+Status: 302 Found
+Location: /cgi-bin/assignment10/pages/post?id=$post_id
+
+EOF
+});
