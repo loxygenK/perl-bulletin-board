@@ -6,6 +6,7 @@ use warnings;
 use CGI;
 
 use adapter::IO;
+use components::Form;
 use view::placeholder;
 use repository::PostRepository;
 use types::WithID;
@@ -39,28 +40,10 @@ EOF
   <div class="page_content">
     <section class="new_post_section">
       <h2 class="new_post_section__title">🙌 New post</h2>
-      <form action="/cgi-bin/assignment10/actions/create-new-post">
-        <ul class="new_post_section__form">
-          <li class="new_post_section__form__input">
-            <label for="author">Author</label>
-            <input type="text" id="author" name="author">
-          </li>
-          <li class="new_post_section__form__input">
-            <label for="author">Title</label>
-            <input type="text" id="title" name="title">
-          </li>
-          <li class="new_post_section__form__input">
-            <label for="content">Contents</label>
-            <textarea
-              type="text"
-              id="content"
-              name="content"
-              class="new_post_section__form__textarea"
-            ></textarea>
-          </li>
-          <button type="submit">Post!</button>
-        </ul>
-      </form>
+      ${\( Form::render(
+        "create-new-post",
+        ({author => "Author"}, {title => "Title"}, {content => "Content"})
+      ))}
     </section>
 
     <section class="new_post_section">
