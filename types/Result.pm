@@ -35,3 +35,13 @@ sub unwrap {
 
   return %{$self{"payload"}};
 }
+
+sub unprotect {
+  my %self = %{$_[0]};
+
+  if(!is_ok(\%self)) {
+    return undef;
+  }
+
+  return %{$self{"payload"}};
+}
