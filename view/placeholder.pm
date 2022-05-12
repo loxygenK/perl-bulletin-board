@@ -49,6 +49,7 @@ Content-Type: text/html; charset=UTF-8
       /* ------- Page-specific Style -------- */
       $style
     </style>
+    <meta name="viewport" content="width=device-width">
   </head>
 
   <body>

@@ -1,8 +1,17 @@
 .page_content {
-  display: flex;
-  flex-direction: column;
+  display: grid;
 
   gap: 3em;
+}
+
+@media screen and (min-width: 1280px) {
+  .page_content {
+    grid-template-columns: 1fr 1fr;
+    align-items: flex-start;
+
+    width: 80%;
+    margin: 0 auto;
+  }
 }
 
 .new_post_section__title {
