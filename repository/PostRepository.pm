@@ -45,8 +45,12 @@ sub latest {
   my $count = $_[0];
   my $max_id = ID::get("post");
 
+  if($max_id == 0) {
+    return ();
+  }
+
   my $start = $max_id < $count ? 1 : ($max_id - $count + 1);
-  my $end   = $max_id < $count ? $count : $max_id;
+  my $end   = $max_id;
 
   my @posts = ();
   foreach my $id ($start..$end) {
