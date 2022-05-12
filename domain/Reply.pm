@@ -19,9 +19,9 @@ sub post_id {
 }
 
 sub author {
-  return %{$_[0]}{"post_id"}
+  return %{$_[0]}{"author"}
 }
 
 sub content {
-  return %{$_[0]}{"post_id"}
+  return %{$_[0]}{"content"}
 }
