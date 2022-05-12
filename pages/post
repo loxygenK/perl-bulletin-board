@@ -10,9 +10,13 @@ use CGI;
 use Data::Dumper;
 
 use domain::Post;
+use domain::Reply;
 use repository::PostRepository;
+use repository::ReplyRepository;
 use types::Result;
 use types::WithID;
+
+use components::Form;
 
 use view::placeholder;
 
@@ -20,17 +24,28 @@ local $Data::Dumper::Terse = 1;
 
 ###########################################################3
 
+sub reply_element {
+  my %reply_with_id = %{$_};
+  my %reply = WithID::unwrap(\%reply_with_id);
+
+  return <<EOF
+<li>
+  <h4>${\( Reply::author(\%reply) )}</h4>
+  <p>${\( Reply::content(\%reply) )}</p>
+</li>
+EOF
+;
+}
+
 &placeholder::apply("post", sub {
   my $id = $_[0]->param("id");
+
   my %maybe_post = &PostRepository::get_by_id($id);
+  my %post_with_id = Result::unprotect(\%maybe_post) or return "Could not find the post";
 
-  if(!Result::is_ok(\%maybe_post)) {
-    return "Could not find the post";
-  }
-  my %post_with_id = Result::unwrap(\%maybe_post);
-
-  my $id = WithID::get_id(\%post_with_id);
   my %post = WithID::unwrap(\%post_with_id);
+
+  my @replies = reverse(&ReplyRepository::latest_by_post_id($id, 100));
 
   return <<EOF
 <!-- -->
@@ -48,8 +63,19 @@ local $Data::Dumper::Terse = 1;
       ${\(Post::content(\%post))}
     </section>
   </article>
+  <hr>
+  <section>
+    <h3>Comments</h3>
+    ${\( Form::render(
+      "create-new-reply?post=$id",
+      ({author => "Author"}, {content => "Content"}, {__post_id => $id})
+    ))}
+    <ol>
+      ${\( join("", map(reply_element, @replies)) )}
+    </ol>
+  </section>
 <!--
 EOF
 ;})
 
-# vim: set ft=html: -->
+# vim set ft=html: -->
